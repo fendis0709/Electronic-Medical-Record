@@ -3,6 +3,7 @@
 /storage/*.key
 /vendor
 /.idea
+indonusa_emr_rev.sql
 Homestead.json
 Homestead.yaml
 .env
