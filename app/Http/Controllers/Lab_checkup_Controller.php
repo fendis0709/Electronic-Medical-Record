@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 //use Illuminate\Support\Facades\Storage;
 
-class Lab_checkup extends Controller {
+class Lab_checkup_Controller extends Controller {
 
     public function search() {
         return view('lab_checkup.search');

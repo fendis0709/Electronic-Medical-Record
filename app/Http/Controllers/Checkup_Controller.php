@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
-class Checkup extends Controller {
+class Checkup_Controller extends Controller {
 
     //Untuk mengisi formulir pemeriksaan pasien
     public function step_1() {

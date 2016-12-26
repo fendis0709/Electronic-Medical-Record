@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
-class Patient extends Controller {
+class Patient_Controller extends Controller {
 
     function auth() {
         if (Auth::guest()) {

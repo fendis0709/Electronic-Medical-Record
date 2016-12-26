@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
-class Doctor extends Controller {
+class Doctor_Controller extends Controller {
 
     function auth() {
         if (Auth::guest()) {

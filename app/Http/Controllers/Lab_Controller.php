@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 //use Illuminate\Support\Facades\Storage;
 
-class Lab extends Controller {
+class Lab_Controller extends Controller {
 
     function auth() {
         if (Auth::guest()) {

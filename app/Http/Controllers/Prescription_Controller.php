@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
-class Prescription extends Controller {
+class Prescription_Controller extends Controller {
 
     public function all() {
         $patient_id = DB::table('patient')->where('user_id', Auth::user()->id)->value('id');

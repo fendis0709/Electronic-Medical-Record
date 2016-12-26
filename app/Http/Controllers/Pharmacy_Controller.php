@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
-class Pharmacy extends Controller {
+class Pharmacy_Controller extends Controller {
     /*
      * Untuk menampilkan dashboard farmasi
      */

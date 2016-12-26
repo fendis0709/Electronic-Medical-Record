@@ -11,7 +11,7 @@ use App\Doctor;
 use App\Lab;
 use App\User;
 
-class Admin extends Controller {
+class Admin_Controller extends Controller {
 
     function auth() {
         if (Auth::guest()) {
