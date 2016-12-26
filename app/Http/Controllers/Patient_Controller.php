@@ -9,6 +9,8 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Mail\Account_Verification;
+use Illuminate\Support\Facades\Mail;
 
 class Patient_Controller extends Controller {
 
@@ -56,15 +58,14 @@ class Patient_Controller extends Controller {
     //Untuk memproses form tambah pasien - Hanya untuk admin
     public function patient_add_submit(Request $request) {
 
-        $password = explode("@", $request->input('email'));
-        $pass = $password[0];
+        $password = $this->generate_pass();
         //Insert into account table
         $account = new User;
 
         $account->email = $request->input('email');
         //Password will be added when user's first login.
-        $account->password = password_hash($pass, PASSWORD_DEFAULT);
-        ;
+        $account->password = password_hash($password, PASSWORD_DEFAULT);
+
         $account->name = $request->input('name');
         $account->city = $request->input('city');
         $account->address = $request->input('address');
@@ -104,7 +105,24 @@ class Patient_Controller extends Controller {
         $account_patient = $account::where('email', $request->input('email'))->first();
         $account_patient->patient()->save($patient);
 
+        $this->sendmail($request->input('name'), $request->input('email'), $password);
+
         return Redirect::back()->with('message', 'Data pasien ' . $request->input('name') . ' telah berhasil ditambahkan.');
+    }
+
+    public function generate_pass($length = 15) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+
+    public function sendmail($name, $email, $pass) {
+        $mail_param = new Account_Verification($name, $email, $pass);
+        Mail::to($email)->send($mail_param);
     }
 
     //Untuk menampilkan profil pasien - Untuk Admin dan Pasien

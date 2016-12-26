@@ -6,9 +6,9 @@ use Auth;
 use Redirect;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Patient;
-use App\Doctor;
-use App\Lab;
+//use App\Patient;
+//use App\Doctor;
+//use App\Lab;
 use App\User;
 
 class Admin_Controller extends Controller {

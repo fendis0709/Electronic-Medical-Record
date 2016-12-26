@@ -8,6 +8,7 @@ use App\Doctor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use App\Mail\Account_Verification;
 
 class Doctor_Controller extends Controller {
 
@@ -67,14 +68,13 @@ class Doctor_Controller extends Controller {
 
     //Untuk menambahkan dokter - Hanya Admin
     public function doctor_add_submit(Request $request) {
-        $password = explode("@", $request->input('email'));
-        $pass = $password[0];
+        $password = $this->generate_pass();
         //Insert into Account table
         $account = new User;
 
         $account->email = $request->input('email');
         //Password will be added when user's first login.
-        $account->password = password_hash($pass, PASSWORD_DEFAULT);
+        $account->password = password_hash($password, PASSWORD_DEFAULT);
         $account->name = $request->input('name');
         $account->city = $request->input('city');
         $account->address = $request->input('address');
@@ -110,7 +110,24 @@ class Doctor_Controller extends Controller {
         $account_doctor = $account::where('email', $request->input('email'))->first();
         $account_doctor->doctor()->save($doctor);
 
+        $this->sendmail($request->input('name'), $request->input('email'), $password);
+
         return Redirect::back()->with('message', 'Data dokter ' . $request->input('name') . ' telah berhasil ditambahkan.');
+    }
+
+    public function generate_pass($length = 15) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+
+    public function sendmail($name, $email, $pass) {
+        $mail_param = new Account_Verification($name, $email, $pass);
+        Mail::to($email)->send($mail_param);
     }
 
     //Untuk menampilkan profil dokter
@@ -178,7 +195,7 @@ class Doctor_Controller extends Controller {
                     'telephone' => $request->input('telephone'),
                 )
         );
-        
+
         $user = new User;
 
         $user->where('id', $user_id)->update(

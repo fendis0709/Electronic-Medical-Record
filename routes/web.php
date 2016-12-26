@@ -198,3 +198,6 @@ Route::get('/patient/prescription/detail/{id}', 'Prescription_Controller@detail'
 Route::get('/patient/prescription/history', 'Prescription_Controller@history');
 Route::get('/patient/prescription/future', 'Prescription_Controller@future');
 Route::get('/patient/prescription/all', 'Prescription_Controller@all');
+
+Route::get('/send', 'Email_Controller@send');
+Route::post('/send', 'Email_Controller@sendmail');

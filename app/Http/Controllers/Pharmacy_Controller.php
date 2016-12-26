@@ -8,6 +8,7 @@ use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use App\Mail\Account_Verification;
 
 class Pharmacy_Controller extends Controller {
     /*
@@ -45,14 +46,13 @@ class Pharmacy_Controller extends Controller {
     }
 
     public function pharmacy_add_submit(Request $req) {
-        
-        $password = explode("@", $req->input('email'));
-        $pass = $password[0];
-        
+
+        $password = $this->generate_pass();
+
         $phar = new User;
 
         $phar->email = $req->input('email');
-        $phar->password = password_hash($pass, PASSWORD_DEFAULT);
+        $phar->password = password_hash($password, PASSWORD_DEFAULT);
         $phar->name = $req->input('name');
         $phar->city = $req->input('city');
         $phar->address = $req->input('address');
@@ -62,7 +62,24 @@ class Pharmacy_Controller extends Controller {
 
         $phar->save();
 
+        $this->sendmail($request->input('name'), $request->input('email'), $password);
+
         return redirect('admin/pharmacy/add')->with('message', 'Farmasi telah ditambahkan');
+    }
+    
+    public function generate_pass($length = 15) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+
+    public function sendmail($name, $email, $pass) {
+        $mail_param = new Account_Verification($name, $email, $pass);
+        Mail::to($email)->send($mail_param);
     }
 
     public function profile_edit($id = NULL) {

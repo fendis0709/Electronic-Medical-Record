@@ -9,6 +9,8 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
+use App\Mail\Account_Verification;
+
 //use Illuminate\Support\Facades\Storage;
 
 class Lab_Controller extends Controller {
@@ -65,13 +67,12 @@ class Lab_Controller extends Controller {
 
     //Menyimpan data lab ke database
     public function lab_add_submit(Request $request) {
-        $password = explode("@", $request->input('email'));
-        $pass = $password[0];
+        $password = $this->generate_pass();
 
         $account = new User;
 
         $account->email = $request->input('email');
-        $account->password = password_hash($pass, PASSWORD_DEFAULT);
+        $account->password = password_hash($password, PASSWORD_DEFAULT);
         $account->name = $request->input('name');
         $account->city = $request->input('city');
         $account->address = $request->input('address');
@@ -98,7 +99,24 @@ class Lab_Controller extends Controller {
         $account_lab = $account::where('email', $request->input('email'))->first();
         $account_lab->lab()->save($lab);
 
+        $this->sendmail($request->input('name'), $request->input('email'), $password);
+
         return Redirect::back()->with('message', 'Data laboratorium ' . $request->input('name') . ' telah berhasil ditambahkan.');
+    }
+
+    public function generate_pass($length = 15) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+
+    public function sendmail($name, $email, $pass) {
+        $mail_param = new Account_Verification($name, $email, $pass);
+        Mail::to($email)->send($mail_param);
     }
 
     //Untuk menampilkan profile laboratorium

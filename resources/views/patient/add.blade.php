@@ -68,7 +68,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-id-card"></i>
                                             </div>
-                                            <input name="nik" type="text" class="form-control" id="inputName" placeholder="Nomor Identitas Kependudukan" autofocus value="123">
+                                            <input name="nik" type="text" class="form-control" id="inputName" placeholder="Nomor Identitas Kependudukan" autofocus/>
                                         </div>
                                     </div>
                                 </div>
@@ -80,7 +80,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-envelope"></i>
                                             </div>
-                                            <input name="email" type="email" class="form-control" id="inputName" placeholder="Email" value="email@email.com">
+                                            <input name="email" type="email" class="form-control" id="inputName" placeholder="Email"/>
                                         </div>
                                     </div>
                                 </div>
@@ -92,7 +92,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-user"></i>
                                             </div>
-                                            <input name="name" type="text" class="form-control" id="inputEmail" placeholder="Nama" value="nama">
+                                            <input name="name" type="text" class="form-control" id="inputEmail" placeholder="Nama"/>
                                         </div>
                                     </div>
                                 </div>
@@ -120,7 +120,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input name="birth_date" type="text" class="form-control pull-right" id="datepicker" value="12/23/1994">
+                                            <input name="birth_date" type="text" class="form-control pull-right" id="datepicker"/>
                                         </div>
                                     </div>
                                 </div>
@@ -149,7 +149,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-home"></i>
                                             </div>
-                                            <textarea name="address" class="form-control" id="inputExperience" placeholder="Alamat">Abjasfbsdhbfskdjcbsdkjbf</textarea>
+                                            <textarea name="address" class="form-control" id="inputExperience" placeholder="Alamat"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -161,7 +161,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-mobile-phone"></i>
                                             </div>
-                                            <input name="mobile" type="text" class="form-control" id="inputSkills" placeholder="Nomor Ponsel" value="08570897837483">
+                                            <input name="mobile" type="text" class="form-control" id="inputSkills" placeholder="Nomor Ponsel"/>
                                         </div>
                                     </div>
                                 </div>
@@ -173,7 +173,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-phone"></i>
                                             </div>
-                                            <input name="telephone" type="text" class="form-control" id="inputSkills" placeholder="Nomor Telepon" value="012123233">
+                                            <input name="telephone" type="text" class="form-control" id="inputSkills" placeholder="Nomor Telepon"/>
                                         </div>
                                     </div>
                                 </div>
