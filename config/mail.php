@@ -29,8 +29,9 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'mail.indonusasolutama.com'),
-//        'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+//    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
+    // 'host' => env('MAIL_HOST', 'mail.indonusasolutama.com'),
+        'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
 
 
     /*
@@ -57,11 +58,18 @@ return [
     |
     */
 
+    // 'from' => [
+    //     'address' => env('MAIL_FROM_ADDRESS', 'testing.fendi@indonusasolutama.com'),
+    //     'name' => env('MAIL_FROM_NAME', 'Fendi Septiawan'),
+    // ],
+//    'from' => [
+//        'address' => env('MAIL_FROM_ADDRESS', 'fendi.septiawan0709@gmail.com'),
+//        'name' => env('MAIL_FROM_NAME', 'EMR Indonusa Solutama'),
+//    ],
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'testing.fendi@indonusasolutama.com'),
-        'name' => env('MAIL_FROM_NAME', 'Fendi Septiawan'),
+        'address' => env('MAIL_FROM_ADDRESS', 'admin@emr.com'),
+        'name' => env('MAIL_FROM_NAME', 'Electronic Medical Record'),
     ],
-
     /*
     |--------------------------------------------------------------------------
     | E-Mail Encryption Protocol
@@ -86,7 +94,8 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME', base64_decode('dGVzdGluZy5mZW5kaUBpbmRvbnVzYXNvbHV0YW1hLmNvbQ==')),
+    // 'username' => env('MAIL_USERNAME', base64_decode('dGVzdGluZy5mZW5kaUBpbmRvbnVzYXNvbHV0YW1hLmNvbQ==')),
+    'username' => env('MAIL_USERNAME', base64_decode('ZmVuZGkuc2VwdGlhd2FuMDcwOUBnbWFpbC5jb20=')),
 
     /*
     |--------------------------------------------------------------------------
@@ -99,7 +108,8 @@ return [
     |
     */
 
-    'password' => env('MAIL_PASSWORD', base64_decode('VGVzdGluZ2ZlbmRpMQ==')),
+    // 'password' => env('MAIL_PASSWORD', base64_decode('VGVzdGluZ2ZlbmRpMQ==')),
+    'password' => env('MAIL_PASSWORD', base64_decode('OTBuZGFuZzA3MDk=')),
 
     /*
     |--------------------------------------------------------------------------

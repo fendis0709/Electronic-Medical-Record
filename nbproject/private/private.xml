@@ -3,14 +3,24 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Xampp/htdocs/indonusa_project/app/Http/Controllers/Lab_checkup.php</file>
-            <file>file:/D:/Xampp/htdocs/indonusa_project/app/Http/Controllers/Pharmacy.php</file>
-            <file>file:/D:/Xampp/htdocs/indonusa_project/app/Http/Controllers/Doctor.php</file>
-            <file>file:/D:/Xampp/htdocs/indonusa_project/app/Http/Controllers/Patient.php</file>
+            <file>file:/D:/Xampp/htdocs/indonusa_project/app/Http/Controllers/Doctor_Controller.php</file>
+            <file>file:/D:/Xampp/htdocs/indonusa_project/app/Http/Controllers/Pharmacy_Controller.php</file>
+            <file>file:/D:/Xampp/htdocs/indonusa_project/app/Http/Controllers/Patient_Controller.php</file>
+            <file>file:/D:/Xampp/htdocs/indonusa_project/app/Http/Controllers/Lab_Controller.php</file>
+            <file>file:/D:/Xampp/htdocs/indonusa_project/resources/views/patient/add.blade.php</file>
             <file>file:/D:/Xampp/htdocs/indonusa_project/routes/web.php</file>
-            <file>file:/D:/Xampp/htdocs/indonusa_project/app/Http/Controllers/Checkup.php</file>
-            <file>file:/D:/Xampp/htdocs/indonusa_project/app/Http/Controllers/Lab.php</file>
-            <file>file:/D:/Xampp/htdocs/indonusa_project/app/Http/Controllers/Prescription.php</file>
+            <file>file:/D:/Xampp/htdocs/indonusa_project/app/Http/Controllers/Prescription_Controller.php</file>
+            <file>file:/D:/Xampp/htdocs/indonusa_project/app/Http/Controllers/Lab_checkup_Controller.php</file>
+            <file>file:/D:/Xampp/htdocs/indonusa_project/resources/views/account/email-verification.blade.php</file>
+            <file>file:/D:/Xampp/htdocs/indonusa_project/.env</file>
+            <file>file:/D:/Xampp/htdocs/indonusa_project/app/Http/Controllers/Admin_Controller.php</file>
+            <file>file:/D:/Xampp/htdocs/indonusa_project/app/Mail/Account_Verification.php</file>
+            <file>file:/D:/Xampp/htdocs/indonusa_project/app/Http/Controllers/Email_Controller.php</file>
+            <file>file:/D:/Xampp/htdocs/indonusa_project/config/services.php</file>
+            <file>file:/D:/Xampp/htdocs/indonusa_project/config/mail.php</file>
+            <file>file:/D:/Xampp/htdocs/indonusa_project/app/User.php</file>
+            <file>file:/D:/Xampp/htdocs/indonusa_project/app/Http/Controllers/Checkup_Controller.php</file>
+            <file>file:/D:/Xampp/htdocs/indonusa_project/resources/views/coba/mail.blade.php</file>
         </group>
     </open-files>
 </project-private>

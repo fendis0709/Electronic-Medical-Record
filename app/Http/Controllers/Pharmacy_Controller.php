@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use App\Mail\Account_Verification;
+use PHPMailer;
 
 class Pharmacy_Controller extends Controller {
     /*
@@ -66,7 +67,7 @@ class Pharmacy_Controller extends Controller {
 
         return redirect('admin/pharmacy/add')->with('message', 'Farmasi telah ditambahkan');
     }
-    
+
     public function generate_pass($length = 15) {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $charactersLength = strlen($characters);
@@ -77,7 +78,44 @@ class Pharmacy_Controller extends Controller {
         return $randomString;
     }
 
-    public function sendmail($name, $email, $pass) {
+    public function sendmail($name, $email, $password) {
+        $mail = new PHPMailer;
+
+        //Enable SMTP debugging.
+        $mail->SMTPDebug = 3;
+        //Set PHPMailer to use SMTP.
+        $mail->isSMTP();
+        //Set SMTP host name
+        $mail->Host = "smtp.gmail.com";
+        //Set this to true if SMTP host requires authentication to send email
+        $mail->SMTPAuth = true;
+        //Provide username and password
+        $mail->Username = "fendi.septiawan0709@gmail.com";
+        $mail->Password = "ciqxlyaimkwzoizi";
+        //If SMTP requires TLS encryption then set it
+        $mail->SMTPSecure = "tls";
+        //Set TCP port to connect to
+        $mail->Port = 587;
+
+        $mail->From = "administrator@emr.com";
+        $mail->FromName = "Electronic Medical Record - Aktivasi Akun";
+
+        $mail->addAddress($email, $name);
+
+        $mail->isHTML(true);
+
+        $mail->Subject = "Subject Text";
+        $mail->Body = "<div style='font-size: 14px'><p>Hai, " . $name . ".</p><p>Selamat datang di Electronic Medical Record (EMR).<p>Untuk dapat menggunakan akun Anda, silakan login dengan <br/>Email : " . $email . ".<br/>Password : " . $password . ".</p><p>Harap ganti password Anda segera setelah login.</p><p>Terima kasih.</p>";
+        $mail->AltBody = "Hai, " . $name . ". Selamat datang di Electronic Medical Record (EMR). Untuk dapat menggunakan akun Anda, silakan login dengan email : " . $email . ". password : " . $password . ". Harap ganti password Anda segera setelah login. Terima kasih.";
+
+        if (!$mail->send()) {
+            echo "Mailer Error: " . $mail->ErrorInfo;
+        } else {
+            echo "Message has been sent successfully";
+        }
+    }
+
+    public function sendmail_mailgun($name, $email, $pass) {
         $mail_param = new Account_Verification($name, $email, $pass);
         Mail::to($email)->send($mail_param);
     }
