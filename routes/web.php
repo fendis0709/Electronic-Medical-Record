@@ -56,6 +56,7 @@ Route::post('/admin/checkup/search', 'Checkup_Controller@search_result');
 //Route::get('/admin/checkup/search_result?{term}', ['as' => 'date', 'uses' => 'Checkup_Controller@search']);
 Route::get('/admin/checkup/future', 'Checkup_Controller@future');
 Route::get('/admin/checkup/history', 'Checkup_Controller@history');
+Route::get('/admin/checkup/detail/{id}', 'Checkup_Controller@detail');
 //Menu Dokter
 Route::get('/admin/doctor/add', 'Doctor_Controller@doctor_add');
 Route::post('/admin/doctor/add', 'Doctor_Controller@doctor_add_submit');

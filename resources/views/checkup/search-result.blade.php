@@ -88,6 +88,8 @@
                                         <a href="{{ url('doctor/checkup/detail/'.$r_result->id) }}" title="Lihat detail">
                                     @elseif(Auth::user()->status == 'Patient')
                                         <a href="{{ url('patient/checkup/detail/'.$r_result->id) }}" title="Lihat detail">
+                                    @elseif(Auth::user()->status == 'Admin')
+                                        <a href="{{ url('admin/checkup/detail/'.$r_result->id) }}" title="Lihat detail">
                                     @endif
                                             <button class="btn btn-info"><i class="fa fa-search-plus"></i></button>
                                         </a>
