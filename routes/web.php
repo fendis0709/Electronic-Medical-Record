@@ -132,14 +132,14 @@ Route::get('/lab/profile/edit', 'Lab_Controller@profile_edit');
 Route::post('/lab/profile/edit', 'Lab_Controller@profile_edit_submit');
 Route::get('/lab/profile/edit/password', 'Lab_Controller@password_edit');
 Route::post('/lab/profile/edit/password', 'Lab_Controller@password_edit_submit');
-Route::get('/lab/checkup/add', 'Lab_checkup@add');
-Route::post('/lab/checkup/add', 'Lab_checkup@add_submit');
+Route::get('/lab/checkup/add', 'Lab_checkup_Controller@add');
+Route::post('/lab/checkup/add', 'Lab_checkup_Controller@add_submit');
 
-Route::get('/lab/checkup/search', 'Lab_checkup@search');
-Route::post('/lab/checkup/search', 'Lab_checkup@search_result');
-Route::get('/lab/checkup/future', 'Lab_checkup@future');
-Route::get('/lab/checkup/history', 'Lab_checkup@history');
-Route::get('/lab/checkup/detail/{id}', 'Lab_checkup@detail');
+Route::get('/lab/checkup/search', 'Lab_checkup_Controller@search');
+Route::post('/lab/checkup/search', 'Lab_checkup_Controller@search_result');
+Route::get('/lab/checkup/future', 'Lab_checkup_Controller@future');
+Route::get('/lab/checkup/history', 'Lab_checkup_Controller@history');
+Route::get('/lab/checkup/detail/{id}', 'Lab_checkup_Controller@detail');
 /*
   Route::get('/lab/checkup/future', 'Checkup_Controller@future');
   Route::get('/lab/checkup/history', 'Checkup_Controller@history');
@@ -186,11 +186,11 @@ Route::get('/patient/checkup/search', 'Checkup_Controller@search');
 Route::post('/patient/checkup/search', 'Checkup_Controller@search_result');
 Route::get('/patient/checkup/detail/{id}', 'Checkup_Controller@detail');
 //Menu Lab
-Route::get('/patient/lab/search', 'Lab_checkup@search');
-Route::post('/patient/lab/search', 'Lab_checkup@search_result');
-Route::get('/patient/lab/future', 'Lab_checkup@future');
-Route::get('/patient/lab/history', 'Lab_checkup@history');
-Route::get('/patient/lab/detail/{id}', 'Lab_checkup@detail');
+Route::get('/patient/lab/search', 'Lab_checkup_Controller@search');
+Route::post('/patient/lab/search', 'Lab_checkup_Controller@search_result');
+Route::get('/patient/lab/future', 'Lab_checkup_Controller@future');
+Route::get('/patient/lab/history', 'Lab_checkup_Controller@history');
+Route::get('/patient/lab/detail/{id}', 'Lab_checkup_Controller@detail');
 //Menu Resep
 Route::get('/patient/prescription/search', 'Prescription_Controller@search');
 Route::post('/patient/prescription/search', 'Prescription_Controller@search_result');

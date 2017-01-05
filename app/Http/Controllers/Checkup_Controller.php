@@ -350,7 +350,11 @@ class Checkup_Controller extends Controller {
 
             return view('prescription.detail-prescription', $data);
         } elseif ($check_lab > 0) {
-            $data['lab'] = DB::table('lab_checkup')->where('checkup_id', $id)->get();
+            $data['lab_checkup'] = DB::table('lab_checkup')->where('checkup_id', $id)->get();
+            foreach($data['lab_checkup'] as $r_lab){
+                $lab_id = $r_lab->id;
+            }
+            $data['lab'] = DB::table('lab')->where('id', $lab_id)->get();
 
             return view('lab_checkup.detail-lab', $data);
         } else {
