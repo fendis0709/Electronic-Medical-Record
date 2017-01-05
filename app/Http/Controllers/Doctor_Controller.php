@@ -69,6 +69,29 @@ class Doctor_Controller extends Controller {
 
     //Untuk menambahkan dokter - Hanya Admin
     public function doctor_add_submit(Request $request) {
+        $this->validate($request, [
+            'email' => 'required|email|unique:users',
+            'name' => 'required',
+            'specialization' => 'required',
+            'gender' => 'required',
+            'birth_date' => 'required',
+            'city' => 'required',
+            'address' => 'required',
+            'mobile' => 'required',
+            'telephone' => 'required'
+                ], [
+            'email.required' => 'Email harap diisi',
+            'email.unique' => 'Email pernah digunakan',
+            'name.required' => 'Nama harap diisi',
+            'specialization.required' => 'Mohon isi data spesialisasi Anda',
+            'gender.required' => 'Mohon isi data jenis kelamin Anda',
+            'birth_date.required' => 'Kolom tanggal lahir harap diisi',
+            'city.required' => 'Kota tinggal (domisili) harap diisi',
+            'address.required' => 'Kolom alamat harap diisi',
+            'mobile.required' => 'Kolom nomor ponsel harap diisi',
+            'telephone.required' => 'Kolom telepon harap diisi'
+        ]);
+
         $password = $this->generate_pass();
         //Insert into Account table
         $account = new User;

@@ -68,6 +68,22 @@ class Lab_Controller extends Controller {
 
     //Menyimpan data lab ke database
     public function lab_add_submit(Request $request) {
+        $this->validate($request, [
+            'email' => 'required|email|unique:users',
+            'name' => 'required',
+            'city' => 'required',
+            'address' => 'required',
+            'mobile' => 'numeric',
+            'telephone' => 'numeric'
+                ], [
+            'email.unique' => 'Email pernah digunakan',
+            'name.required' => 'Nama harap diisi',
+            'city.required' => 'Kota (domisili) harap diisi',
+            'address.required' => 'Kolom alamat harap diisi',
+            'mobile.required' => 'Kolom nomor ponsel diisi dengan angka',
+            'telephone.required' => 'Kolom telepon diisi dengan angka'
+        ]);
+        
         $password = $this->generate_pass();
 
         $account = new User;

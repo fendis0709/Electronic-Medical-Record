@@ -59,6 +59,31 @@ class Patient_Controller extends Controller {
     //Untuk memproses form tambah pasien - Hanya untuk admin
     public function patient_add_submit(Request $request) {
 
+        $this->validate($request, [
+            'nik' => 'required|min:5|max:35|unique:patient',
+            'email' => 'required|email|unique:users',
+            'name' => 'required',
+            'gender' => 'required',
+            'birth_date' => 'required',
+            'city' => 'required',
+            'address' => 'required',
+            'mobile' => 'required',
+            'telephone' => 'required',
+            'photo' => 'required'
+                ], [
+            'nik.required' => 'NIK harus diisi',
+            'nik.unique' => 'NIK pernah digunakan.',
+            'email.unique' => 'Email pernah digunakan',
+            'name.required' => 'Nama harap diisi',
+            'gender.required' => 'Mohon isi data jenis kelamin Anda',
+            'birth_date.required' => 'Kolom tanggal lahir harap diisi',
+            'city.required' => 'Kota tinggal (domisili) harap diisi',
+            'address.required' => 'Kolom alamat harap diisi',
+            'mobile.required' => 'Kolom nomor ponsel harap diisi',
+            'telephone.required' => 'Kolom telepon harap diisi',
+            'photo.required' => 'Harap pilih foto untuk profil Anda'
+        ]);
+
         $password = $this->generate_pass();
         //Insert into account table
         $account = new User;
