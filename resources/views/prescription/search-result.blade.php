@@ -36,9 +36,9 @@
                         if ($form == 'search') {
                             ?>
                             @if(Auth::user()->status == 'Patient')
-                            <form class="form-horizontal" method="POST" action="{{ url('pharmacy/prescription/search') }}">
-                            @elseif(Auth::user()->status == 'Pharmacy')
                                 <form class="form-horizontal" method="POST" action="{{ url('patient/prescription/search') }}">
+                            @elseif(Auth::user()->status == 'Pharmacy')
+                            <form class="form-horizontal" method="POST" action="{{ url('pharmacy/prescription/search') }}">
                                     @endif
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <div class="form-group">
@@ -89,21 +89,17 @@
                                         <td><?php echo 'Rp. ' . number_format($r_result->amount, 0, '', ','); ?></td>
                                         <td>{{ $r_result->note }}</td>
                                         <td>
-                                            @if(Auth::user()->status == 'Admin' || Auth::user()->status == 'Pharmacy')
-                                            <a href="#" title="Lihat detail">
-                                                <button class="btn btn-info disabled"><i class="fa fa-search-plus"></i></button>
-                                            </a>
-                                            <a href="#" title="Edit data">
-                                                <button class="btn btn-warning disabled"><i class="fa fa-edit"></i></button>
-                                            </a>
-                                            <a href="#" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')" title="Hapus data">
-                                                <button class="btn btn-danger disabled"><i class="fa fa-trash"></i></button>
-                                            </a>
-                                            @else
+                                            @if(Auth::user()->status == 'Admin')
+                                            <a href="{{ url('admin/prescription/detail/'.$r_result->id) }}" title="Lihat detail">
+                                            @elseif(Auth::user()->status == 'Doctor')
+                                            <a href="{{ url('doctor/prescription/detail/'.$r_result->id) }}" title="Lihat detail">
+                                            @elseif(Auth::user()->status == 'Pharmacy')
+                                            <a href="{{ url('pharmacy/prescription/detail/'.$r_result->id) }}" title="Lihat detail">
+                                            @elseif(Auth::user()->status == 'Patient')
                                             <a href="{{ url('patient/prescription/detail/'.$r_result->id) }}" title="Lihat detail">
+                                            @endif
                                                 <button class="btn btn-info"><i class="fa fa-search-plus"></i></button>
                                             </a>
-                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach
