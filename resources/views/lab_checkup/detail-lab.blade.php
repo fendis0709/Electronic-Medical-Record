@@ -95,6 +95,16 @@
                                                 <p>{{ $r_checkup->note }}</p>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <p style="">Foto hasil pemeriksaan</p>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <a href="{{ url($r_checkup->photo) }}" target="_blank">
+                                                    <button class="btn btn-info">Lihat foto hasil lab</button>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
                                     @endforeach
                                     @endif

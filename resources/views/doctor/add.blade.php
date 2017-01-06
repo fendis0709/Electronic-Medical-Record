@@ -123,7 +123,7 @@
                                                 <i class="fa fa-transgender"></i>
                                             </div>
                                             <select class="form-control" name="gender">
-                                                <option disabled>--Pilih Jenis Kelamin--</option>
+                                                <option disabled {{ ( old('gender') !== 'L' || old('gender') !== 'P' ? 'selected' : '' ) }}>--Pilih Jenis Kelamin--</option>
                                                 <option value="L" {{ ( old('gender') == 'L' ? 'selected' : '' ) }}>Laki - Laki</option>
                                                 <option value="P" {{ ( old('gender') == 'P' ? 'selected' : '' ) }}>Perempuan</option>
                                             </select>
@@ -139,7 +139,7 @@
                                             <div class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </div>
-                                            <input name="birth_date" type="text" class="form-control pull-right" id="datepicker" value="{{ date('m/d/Y', strtotime(old('birth_date'))) }}"/>
+                                            <input name="birth_date" type="text" class="form-control pull-right" id="datepicker" value="{{ (old('birth_date') !== NULL? date('m/d/Y', strtotime(old('birth_date'))) : '') }}"/>
                                         </div>
                                         <span class="text-danger">{{ $errors->first('birth_date') }}</span>
                                     </div>

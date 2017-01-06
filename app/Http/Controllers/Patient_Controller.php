@@ -69,7 +69,7 @@ class Patient_Controller extends Controller {
             'address' => 'required',
             'mobile' => 'required',
             'telephone' => 'required',
-            'photo' => 'required'
+            'photo' => 'required|mimes:jpeg,png,jpg|max:512'
                 ], [
             'nik.required' => 'NIK harus diisi',
             'nik.unique' => 'NIK pernah digunakan.',
@@ -110,8 +110,8 @@ class Patient_Controller extends Controller {
 
         //Uploading photo profile
         //$this->validate($request, [ 'image' => 'required|image|mimes:jpeg,png,jpg|max:512' ]);
-
-        $request->file('photo')->storeAs(('/assets/userfile'), md5($request->input('email')) . '.' . $request->file('photo')->extension());
+        $account_id = DB::table('users')->where('email', $request->input('email'))->value('id');
+        $request->file('photo')->storeAs(('/public/assets/userfile/patient/' . $account_id . '/profile'), md5($request->input('email')) . '.' . $request->file('photo')->extension());
 
         $patient = new Patient(
                 array(
@@ -123,7 +123,7 @@ class Patient_Controller extends Controller {
             'address' => $request->input('address'),
             'mobile' => $request->input('mobile'),
             'telephone' => $request->input('telephone'),
-            'photo' => '/storage/assets/userfile/patient/' . md5($request->input('email')) . '.' . $request->file('photo')->extension()
+            'photo' => 'storage/assets/userfile/patient/' . $account_id . '/profile/' . md5($request->input('email')) . '.' . $request->file('photo')->extension()
                 )
         );
 

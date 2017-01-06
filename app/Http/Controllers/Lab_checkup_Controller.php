@@ -6,7 +6,7 @@ use App\Lab_checkup;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-//use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Storage;
 
 class Lab_checkup_Controller extends Controller {
 
@@ -55,26 +55,40 @@ class Lab_checkup_Controller extends Controller {
 
     //Untuk mengisi pemeriksaan pasien dari lab
     public function add() {
-        $data['checkup'] = DB::table('lab_checkup')->where('date', date('Y-m-d'))->value('patient_id');
+        $data['checkup'] = DB::table('lab_checkup')->where('date', date('Y-m-d'))->where('result', NULL)->value('patient_id');
         $data['patient'] = DB::table('patient')->where('id', $data['checkup'])->get();
 
         return view('lab_checkup.add', $data);
     }
 
     public function add_submit(Request $req) {
+        $lab_id = DB::table('lab')->where('user_id', Auth::user()->id)->value('id');
+        $lab_checkup_id = DB::table('lab_checkup')->where('patient_id', $req->input('patient'))->where('date', date('Y-m-d'))->where('lab_id', $lab_id)->value('id');
+        $checkup_id = DB::table('checkup')->where('patient_id', $req->input('patient'))->where('date', date('Y-m-d'))->value('id');
+        if ($checkup_id == NULL) {
+            $checkup_id = 0;
+        }
+        $account_id = DB::table('patient')->where('id', $req->input('patient'))->value('user_id');
         $lab = new Lab_checkup;
 
-        $lab->lab_id = DB::table('lab')->where('user_id', Auth::user()->id)->value('id');
+        /*
+        $lab->lab_id = $lab_id;
+        $lab->checkup_id = $checkup_id;
         $lab->patient_id = $req->input('patient');
         $lab->result = $req->input('result');
         $lab->notes = $req->input('note');
-        $lab->photo = 'assets/userfile/patient/' . $req->input('patient') . '/lab/abc' . $req->file('photo')->extension();
-        $create = date('Y-m-d H:i:s');
-
         $lab->save();
+        */
 
-        $id_checkup_lab = DB::table('lab_checkup')->where('created_at', $create)->value('id');
-        $req->file('photo')->storeAs(('/assets/userfile/patient/' . $req->input('patient') . '/lab/' . $id_checkup_lab . '/'), ($req->input('patient')) . '.' . $req->file('photo')->extension());
+        $lab->where('id', $lab_checkup_id)->update(
+                array(
+                    'result' => $req->input('result'),
+                    'notes' => $req->input('note'),
+                    'photo' => 'storage/assets/userfile/patient/' . $account_id . '/checkup/lab/' . $lab_checkup_id . '/result' . '.' . $req->file('photo')->extension(),
+                )
+        );
+
+        $req->file('photo')->storeAs(('/public/assets/userfile/patient/' . $account_id . '/checkup/lab/' . $lab_checkup_id), 'result' . '.' . $req->file('photo')->extension());
 
         return redirect('lab/checkup/add');
     }

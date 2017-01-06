@@ -101,6 +101,7 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
+                <!--<img src="{{ url('storage/assets/userfile/lab/4/profile/d434febbe8123bcebbde624b9bca7221.jpg') }}" class="img-circle" alt="User Image">-->
                 <img src="{{ URL::asset('assets/admin-lte/dist/img/user8-128x128.jpg') }}" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">

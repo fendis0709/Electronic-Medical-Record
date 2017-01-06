@@ -83,7 +83,7 @@ class Lab_Controller extends Controller {
             'mobile.required' => 'Kolom nomor ponsel diisi dengan angka',
             'telephone.required' => 'Kolom telepon diisi dengan angka'
         ]);
-        
+
         $password = $this->generate_pass();
 
         $account = new User;
@@ -100,7 +100,8 @@ class Lab_Controller extends Controller {
 
         $account->save();
 
-        $request->file('photo')->storeAs(('/assets/userfile/lab'), md5($request->input('email')) . '.' . $request->file('photo')->extension());
+        $account_id = DB::table('users')->where('email', $request->input('email'))->value('id');
+        $request->file('photo')->storeAs(('/public/assets/userfile/lab/' . $account_id . '/profile'), md5($request->input('email')) . '.' . $request->file('photo')->extension());
 
         $lab = new Lab(
                 array(
@@ -109,7 +110,7 @@ class Lab_Controller extends Controller {
             'telephone' => $request->input('telephone'),
             'city' => $request->input('city'),
             'address' => $request->input('address'),
-            'photo' => '/storage/assets/userfile/lab/' . md5($request->input('email')) . '.' . $request->file('photo')->extension()
+            'photo' => 'storage/assets/userfile/lab/' . $account_id . '/profile/' . md5($request->input('email')) . '.' . $request->file('photo')->extension()
                 )
         );
 

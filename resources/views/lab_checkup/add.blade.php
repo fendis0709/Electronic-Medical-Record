@@ -59,7 +59,8 @@
                                 }
                                 ?>
                             </div>
-                            <form class="form-horizontal" action="{{ url('/lab/checkup/add') }}" method="POST">
+                            <form class="form-horizontal" action="{{ url('/lab/checkup/add') }}" method="POST" enctype="multipart/form-data">
+                                <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-2">
@@ -112,7 +113,7 @@
                                 <div class="form-group">
                                     <label for="exampleInputFile" class="col-sm-2 control-label">Foto</label>
                                     <div class="col-sm-10">
-                                        <input name="photo" type="file" id="exampleInputFile">
+                                        <input name="photo" type="file" id="exampleInputFile" accept="images/*">
 
                                         <p class="help-block">File maksimum berukuran 500KB.</p>
                                     </div>

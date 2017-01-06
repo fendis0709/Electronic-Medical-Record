@@ -115,7 +115,8 @@ class Doctor_Controller extends Controller {
         $birth_date = explode('/', $request->input('birth_date'));
         $birth_date_db = $birth_date[2] . '-' . $birth_date[0] . '-' . $birth_date[1];
 
-        $request->file('photo')->storeAs(('/assets/userfile/doctor'), md5($request->input('email')) . '.' . $request->file('photo')->extension());
+        $account_id = DB::table('users')->where('email', $request->input('email'))->value('id');
+        $request->file('photo')->storeAs(('/public/assets/userfile/doctor/' . $account_id . '/profile'), md5($request->input('email')) . '.' . $request->file('photo')->extension());
 
         $doctor = new Doctor(
                 array(
@@ -127,7 +128,7 @@ class Doctor_Controller extends Controller {
             'address' => $request->input('address'),
             'mobile' => $request->input('mobile'),
             'telephone' => $request->input('telephone'),
-            'photo' => '/storage/assets/userfile/doctor/' . md5($request->input('email')) . '.' . $request->file('photo')->extension()
+            'photo' => 'storage/assets/userfile/doctor/' . $account_id . '/profile/' . md5($request->input('email')) . '.' . $request->file('photo')->extension()
                 )
         );
 
